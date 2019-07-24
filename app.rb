@@ -24,16 +24,22 @@ end
 
 
 get '/hello' do
-    name = params[:name]
+    name = params[:towa]
     "<h1>HEllo #{name}!</h1>"
 end
 
-get '/user/:name' do
+get '/user/:user_name' do
     name = params[:name]
     "<h1>HEllo #{name}!</h1>"
 end
 
 
 get '/time' do
+    Time.now.to_s
+end
+
+
+
+get '/good' do
     Time.now.to_s
 end
