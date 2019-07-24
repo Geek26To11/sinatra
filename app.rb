@@ -43,3 +43,9 @@ end
 get '/good' do
     Time.now.to_s
 end
+get '/good' do
+    Time.now.to_s
+end
+get '/good' do
+    Time.now.to_s
+end
