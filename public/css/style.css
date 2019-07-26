@@ -15,6 +15,11 @@
     clear: left;
   }
   
+
+
+
+
+
   .container {
     /* max-width: 1170px; */
     width: 100%;
@@ -24,7 +29,7 @@
   
   .top-wrapper {
     padding: 180px 0 100px 0;
-    background-image: url(https://prog-8.com/images/html/advanced/top.png);
+    background-image: url(../image/seaTop.jpg);
     background-size: cover;
     color: white;
     text-align: center;
@@ -82,16 +87,20 @@
   header {
     height: 65px;
     width: 100%;
-    background-color: rgba(34, 49, 52, 0.9);
+    background-color: rgba(74, 199, 224, 0.85);
     position :fixed;
     top: 0;
     z-index: 10;
   }
   
+
+
+
   .logo {
-    width: 124px;
-    margin-top: 20px;
-    background-image: url(/public/image/banner_top.jpg);
+    width: 215px;
+    /* margin-top: 20px; */
+    border-radius: 3px;
+    opacity: 0.9;
   }
   
   .header-left {
