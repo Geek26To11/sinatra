@@ -30,13 +30,10 @@ get '/login' do
 end
 
 
-
 # app.rb
 get '/form' do
     erb :form
 end
-
-
 
 
 post '/form_output' do
@@ -53,10 +50,27 @@ post '/form_output' do
   end
 
 
+
+# ----------upload--------------
 get "/upload" do
+
+    @images = Dir.glob("./public/image/*").map{|path| path.split('/').last }
     erb :upload
+
 end
 
+post "/upload" do
+    @file_name = params[:file][:filename]
+    FileUtils.mv(params[:file][:tempfile], "./public/image/#{@file_name}")
+    # erb :uploaded
+    redirect "/upload"
+end
+
+
+    
+    
+    # erb :uploaded
+# redirect '/upload
 
 
 post '/save_image' do
@@ -64,9 +78,9 @@ post '/save_image' do
 @filename = params[:file][:filename]
 file = params[:file][:tempfile]
 
-File.open("./public/image/#{@filename}", 'wb') do |f|
-    f.write(file.read)
-end
+    File.open("./public/image/#{@filename}", 'wb') do |f|
+        f.write(file.read)
+    end
 
 
     erb :show_image
