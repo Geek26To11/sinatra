@@ -23,6 +23,29 @@ get '/register' do
 end
 
 
+get '/login' do
+    erb :login
+end
+
+
+
+# app.rb
+get '/form' do
+    erb :form
+end
+
+
+
+post '/form_output' do
+    @name = params[:name]
+    @email = params[:email]
+    @content = params[:content]
+  
+    erb :form_output
+  end
+
+
+
 get '/hello' do
     name = params[:towa]
     "<h1>HEllo #{name}!</h1>"
