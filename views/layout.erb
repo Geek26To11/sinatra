@@ -14,7 +14,10 @@
 </head>
 <body>
     <div class="container">
-        <%= yield %>
+    <% if session[:name] %>
+        <p>Hello, <%= session[:name] %></p>
+    <% end %>
+    <%= yield %>
     </div>
 </body>
 </html>

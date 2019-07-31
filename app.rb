@@ -1,6 +1,10 @@
 require 'sinatra'
 require 'fileutils'
 require 'sinatra/reloader'
+require 'sinatra/cookies'
+enable :sessions
+
+set :public_folder, 'public'
 
 
 # get '/' do
@@ -25,10 +29,23 @@ get '/register' do
 end
 
 
-get '/login' do
-    erb :login
-end
+post '/login' do
+    if get_session_user()
+      redirect '/', 302
+    end
 
+    user = try_login(params['account_name'], params['password'])
+    if user
+      session[:user] = {
+        id: user[:id]
+      }
+      session[:csrf_token] = SecureRandom.hex(16)
+      redirect '/', 302
+    else
+      flash[:notice] = 'アカウント名かパスワードが間違っています'
+      redirect '/login', 302
+    end
+  end
 
 # app.rb
 get '/form' do
@@ -67,8 +84,8 @@ post "/upload" do
 end
 
 
-    
-    
+
+
     # erb :uploaded
 # redirect '/upload
 
@@ -94,10 +111,25 @@ end
 
 
 
+# get '/hello' do
+#     @name = params[:towa]
+#     "<h1>HEllo #{name}!</h1>"
+#     erb :hello
+# end
+
+
+
+# /hello?name=sabo
 get '/hello' do
-    name = params[:towa]
-    "<h1>HEllo #{name}!</h1>"
+    # query string から取得
+    # @name = params[:name]
+    session[:name] = params[:name]
+
+    erb :hello
 end
+
+
+
 
 get '/user/:user_name' do
     name = params[:name]
